@@ -17,13 +17,29 @@ CREATE TABLE tutors (
     modules_assigned TEXT
 );
 
+-- Modules table
+CREATE TABLE modules (
+    module_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tutor Modules table
+CREATE TABLE tutor_modules (
+    tutor_module_id SERIAL PRIMARY KEY,
+    tutor_id INT REFERENCES tutors(tutor_id) ON DELETE CASCADE,
+    module_id INT REFERENCES modules(module_id) ON DELETE CASCADE
+);
+
 -- TOPIC table
 CREATE TABLE topics (
     topic_id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
     created_by INT REFERENCES students(student_id) ON DELETE CASCADE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    module_id INT REFERENCES modules(module_id) ON DELETE CASCADE
 );
 
 -- SUBSCRIPTIONS (students subscribing to topics)

@@ -15,17 +15,17 @@ app.get("/", (req, res) => {
   res.send("Backend is running ✅");
 });
 
-// example route: get users
-
-/* app.get("/users", async (req, res) => {
+// example route: create a student
+app.post("/students", async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM users");
-    res.json(result.rows);
+    const newStudent = await pool.query("INSERT INTO students (name, email, password, academic_details) VALUES ($1, $2, $3, $4)", [req.body.name, req.body.email, req.body.password, req.body.academic_details]);
+
+    res.json(newStudent);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server error");
   }
-}); */
+  
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
