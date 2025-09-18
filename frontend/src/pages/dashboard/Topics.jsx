@@ -85,7 +85,8 @@ const Topics = () => {
                   </h3>
                   <p className="text-gray-600 mt-1">{topic.description}</p>
                   <p className="text-sm text-gray-500 mt-2">
-                    Created by <span className="font-medium">{topic.author}</span>
+                    Created by{" "}
+                    <span className="font-medium">{topic.author}</span>
                   </p>
                 </div>
                 <button className="bg-black text-white px-4 py-2 rounded-lg">

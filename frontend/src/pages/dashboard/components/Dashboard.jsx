@@ -9,7 +9,10 @@ const topics = [
 ];
 
 const notifications = [
-  { text: `New response to your query in "Data Structures"`, time: "2 hours ago" },
+  {
+    text: `New response to your query in "Data Structures"`,
+    time: "2 hours ago",
+  },
   { text: `New resource uploaded to "Web Development"`, time: "1 day ago" },
   { text: "Welcome to CampusLearn!", time: "3 days ago" },
 ];
@@ -18,7 +21,7 @@ export default function Dashboard() {
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-4">Student Dashboard</h2>
-      
+
       <div className="flex space-x-4 mb-6">
         <button className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">
           + Create New Topic

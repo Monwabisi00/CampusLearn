@@ -6,14 +6,14 @@ import Dashboard from "./components/Dashboard";
 
 export default function Home() {
   return (
-      <div className="flex h-screen bg-gray-50">
-        <Sidebar />
-        <div className="flex flex-col flex-1">
-          <Navbar />
-          <main className="p-6 overflow-y-auto">
-            <Dashboard />
-          </main>
-        </div>
+    <div className="flex h-screen bg-gray-50">
+      <Sidebar />
+      <div className="flex flex-col flex-1">
+        <Navbar />
+        <main className="p-6 overflow-y-auto">
+          <Dashboard />
+        </main>
       </div>
+    </div>
   );
 }

@@ -70,7 +70,9 @@ function Signup() {
 
           {/* Confirm Password */}
           <div>
-            <label className="block text-sm font-medium mb-1">Confirm Password</label>
+            <label className="block text-sm font-medium mb-1">
+              Confirm Password
+            </label>
             <input
               type="password"
               name="confirmPassword"
