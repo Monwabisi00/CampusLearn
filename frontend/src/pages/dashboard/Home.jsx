@@ -1,5 +1,4 @@
 import React from "react";
-import { BrowserRouter as Router} from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import Dashboard from "./components/Dashboard";
@@ -7,7 +6,6 @@ import Dashboard from "./components/Dashboard";
 
 export default function Home() {
   return (
-    <Router>
       <div className="flex h-screen bg-gray-50">
         <Sidebar />
         <div className="flex flex-col flex-1">
@@ -17,6 +15,5 @@ export default function Home() {
           </main>
         </div>
       </div>
-    </Router>
   );
 }
