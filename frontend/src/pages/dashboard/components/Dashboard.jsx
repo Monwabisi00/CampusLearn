@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import TopicCard from "./TopicCard";
 import NotificationItem from "./NotificationItem";
+import QueryModal from "./AddQuery";
 
 const topics = [
   { title: "Data Structures & Algorithms", activity: "3 new queries" },
@@ -18,6 +19,13 @@ const notifications = [
 ];
 
 export default function Dashboard() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [queries, setQueries] = useState([]);
+
+  const addQuery = (newQuery) => {
+    setQueries([...queries, { id: queries.length + 1, ...newQuery }]);
+  };
+
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-4">Student Dashboard</h2>
@@ -26,7 +34,10 @@ export default function Dashboard() {
         <button className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">
           + Create New Topic
         </button>
-        <button className="border px-4 py-2 rounded-lg hover:bg-gray-100">
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="border px-4 py-2 rounded-lg hover:bg-gray-100"
+        >
           Send Message
         </button>
       </div>
@@ -46,6 +57,13 @@ export default function Dashboard() {
           <NotificationItem key={idx} text={n.text} time={n.time} />
         ))}
       </div>
+
+      {/* Modal */}
+      <QueryModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={addQuery}
+      />
     </div>
   );
 }
