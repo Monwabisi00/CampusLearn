@@ -13,8 +13,8 @@ CREATE TABLE students (
 -- TUTOR table (tutors are also students, so we link to students)
 CREATE TABLE tutors (
     tutor_id SERIAL PRIMARY KEY,
-    student_id INT UNIQUE REFERENCES students(student_id) ON DELETE CASCADE,
-    modules_assigned TEXT
+    student_id INT UNIQUE REFERENCES students(student_id) ON DELETE CASCADE
+    module_id INT REFERENCES modules(module_id) ON DELETE CASCADE
 );
 
 -- Modules table
@@ -23,13 +23,6 @@ CREATE TABLE modules (
     name VARCHAR(100) NOT NULL,
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- Tutor Modules table
-CREATE TABLE tutor_modules (
-    tutor_module_id SERIAL PRIMARY KEY,
-    tutor_id INT REFERENCES tutors(tutor_id) ON DELETE CASCADE,
-    module_id INT REFERENCES modules(module_id) ON DELETE CASCADE
 );
 
 -- TOPIC table
