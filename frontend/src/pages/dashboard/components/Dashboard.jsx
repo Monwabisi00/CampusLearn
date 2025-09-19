@@ -34,6 +34,28 @@ export default function Dashboard() {
     fetchTopics();
   }, []);
 
+  useEffect(() => {
+    const fetchTopics = async () => {
+      const user = JSON.parse(authUtils.getUser() || "{}");
+      if (!user || !user.student_id) return;
+      try {
+        const res = await fetch(`http://localhost:5000/queries/${user.student_id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authUtils.getToken()}`,
+          },
+        });
+        if (!res.ok) throw new Error("Failed to fetch queries");
+        const data = await res.json();
+        setQueries(data);
+      } catch (err) {
+        console.error("Fetch error:", err);
+      }
+    };
+
+    fetchTopics();
+  }, []);
+
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-4">Student Dashboard</h2>
@@ -61,8 +83,23 @@ export default function Dashboard() {
       </div>
 
       {/* Notifications */}
-      <h3 className="text-lg font-semibold mb-2">Recent Messages</h3>
-      <div className="space-y-3"></div>
+      <h3 className="text-lg font-semibold mb-2">Recent Queries</h3>
+      <div className="space-y-3">
+        {queries.length === 0 ? (
+          <p>No recent queries.</p>
+        ) : (
+          queries.map((q) => (
+            <div
+              key={q.query_id}
+              className="p-4 bg-white rounded-xl shadow hover:shadow-md cursor-pointer transition-all"
+            >
+              <h3 className="text-lg font-semibold">{q.topic_title}</h3>
+              <p className="text-sm text-gray-600">{q.content}</p>
+              <p className="text-xs text-gray-400 mt-1">Topic: {q.topic_description}</p>
+            </div>
+          ))
+        )}
+      </div>
 
       {/* Modals */}
       <QueryModal isOpen={isQueryModalOpen} onClose={() => setIsQueryModalOpen(false)} onSubmit={addQuery} />

@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Home from "./pages/dashboard/Home";
-import Messages from "./pages/dashboard/Messages";
+import Queries from "./pages/dashboard/Queries";
 import TopicDetails from "./pages/dashboard/Topics";
 import ProtectedRoute from "./pages/ProtectedRoute";
 
@@ -31,10 +31,10 @@ function App() {
           }
         />
         <Route
-          path="messages"
+          path="queries"
           element={
             <ProtectedRoute>
-              <Messages />
+              <Queries />
             </ProtectedRoute>
           }
         />
