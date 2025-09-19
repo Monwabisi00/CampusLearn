@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { authUtils } from "../../utils/auth";
 
 function Login() {
   const navigate = useNavigate();
@@ -29,10 +30,10 @@ function Login() {
       if (!res.ok) throw new Error(data.error || "Login failed");
 
       // save token in localStorage
-      localStorage.setItem("token", data.token);
+      authUtils.setToken(data.token);
 
       // save user info
-      localStorage.setItem("user", JSON.stringify(data.student));
+      authUtils.setUser(JSON.stringify(data.student));
 
       navigate("/home"); // redirect to dashboard after login
     } catch (err) {
