@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Home, BookOpen, Mail} from "lucide-react";
+import { Home, BookOpen, Mail } from "lucide-react";
 
 const menuItems = [
   { icon: <Home size={18} />, label: "Dashboard", path: "/home" },

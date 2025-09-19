@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { authUtils } from "../../../utils/auth";
 
 export default function TopicModal({ isOpen, onClose, onSubmit }) {
   const [title, setTitle] = useState("");
@@ -16,15 +17,36 @@ export default function TopicModal({ isOpen, onClose, onSubmit }) {
     }
   }, [isOpen]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title.trim() || !description.trim() || !selectedModule) return;
+    if (!title || !description) return alert("Please fill in both fields");
 
-    onSubmit({ title, description, moduleId: selectedModule });
-    setTitle("");
-    setDescription("");
-    setSelectedModule("");
-    onClose();
+    try {
+      const res = await fetch("http://localhost:5000/topics", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authUtils.getToken()}`,
+        },
+        body: JSON.stringify({
+          title,
+          description,
+          module_id: selectedModule,
+        }),
+      });
+
+      if (!res.ok) throw new Error("Failed to create topic");
+
+      const data = await res.json();
+      onSubmit(data); // <-- This calls addQuery in Dashboard
+      setTitle("");
+      setDescription("");
+      onClose();
+      alert("Topic created successfully!");
+    } catch (err) {
+      console.error(err);
+      alert("Error creating topic");
+    }
   };
 
   if (!isOpen) return null;
@@ -64,17 +86,10 @@ export default function TopicModal({ isOpen, onClose, onSubmit }) {
           </select>
 
           <div className="flex justify-end space-x-3">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 border rounded-lg hover:bg-gray-100"
-            >
+            <button type="button" onClick={onClose} className="px-4 py-2 border rounded-lg hover:bg-gray-100">
               Cancel
             </button>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800"
-            >
+            <button type="submit" className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800">
               Create
             </button>
           </div>
