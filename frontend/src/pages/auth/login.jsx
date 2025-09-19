@@ -9,10 +9,30 @@ function Login() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Login attempt:", formData);
-    // later: send to backend
+  const handleSubmit = async (e) => {
+    try {
+      const res = await fetch("https://your-backend-url.com/students/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        console.log("Login successful:", data);
+        // Save token to localStorage or context
+        localStorage.setItem("token", data.token);
+        navigate("/dashboard"); // or wherever you want to go
+      } else {
+        alert(data.error || "Login failed");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      alert("Something went wrong");
+    }
   };
 
   return (

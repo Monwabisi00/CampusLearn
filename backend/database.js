@@ -1,12 +1,24 @@
+<<<<<<< Updated upstream:backend/database.js
 const { Pool } = require("pg");
 require("dotenv").config();
+=======
+import pkg from 'pg';
+import dotenv from 'dotenv';
+
+dotenv.config();
+>>>>>>> Stashed changes:backend/src/config/db.js
+
+const { Pool } = pkg;
 
 const pool = new Pool({
-  user: process.env.PG_USER,
-  password: process.env.PG_PASSWORD,
-  host: process.env.PG_HOST,
-  port: process.env.PG_PORT,
-  database: process.env.PG_DATABASE,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false, // Required for Render
+  },
 });
 
+<<<<<<< Updated upstream:backend/database.js
 module.exports = pool;
+=======
+export default pool;
+>>>>>>> Stashed changes:backend/src/config/db.js
