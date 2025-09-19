@@ -1,22 +1,43 @@
 // Main app component
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/dashboard/Home";
+import { Route, Routes } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
-import TopicDetails from "./pages/dashboard/Topics";
+import Home from "./pages/dashboard/Home";
 import Messages from "./pages/dashboard/Messages";
+import TopicDetails from "./pages/dashboard/Topics";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="home" element={<Home />} />
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
-        <Route path="Topics" element={<TopicDetails />} />
-        <Route path="Messages" element={<Messages />} />
+        <Route
+          path="home"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="topics"
+          element={
+            <ProtectedRoute>
+              <TopicDetails />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="messages"
+          element={
+            <ProtectedRoute>
+              <Messages />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   );
