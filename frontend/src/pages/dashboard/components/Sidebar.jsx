@@ -1,11 +1,10 @@
-import React from "react";
+import { BookOpen, Home, Mail } from "lucide-react";
 import { NavLink } from "react-router-dom";
-import { Home, BookOpen, Mail } from "lucide-react";
 
 const menuItems = [
   { icon: <Home size={18} />, label: "Dashboard", path: "/home" },
   { icon: <BookOpen size={18} />, label: "Topics", path: "/topics" },
-  { icon: <Mail size={18} />, label: "Messages", path: "/messages" },
+  { icon: <Mail size={18} />, label: "Queries", path: "/messages" },
 ];
 
 export default function Sidebar() {

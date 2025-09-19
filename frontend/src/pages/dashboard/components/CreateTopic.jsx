@@ -10,7 +10,7 @@ export default function TopicModal({ isOpen, onClose, onSubmit }) {
   // Fetch modules when modal opens
   useEffect(() => {
     if (isOpen) {
-      fetch("http://localhost:5000/modules") // adjust if your backend runs elsewhere
+      fetch("http://localhost:5000/modules")
         .then((res) => res.json())
         .then((data) => setModules(data))
         .catch((err) => console.error("Failed to fetch modules:", err));
