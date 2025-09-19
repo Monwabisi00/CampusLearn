@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -34,7 +34,7 @@ function Login() {
       // save user info
       localStorage.setItem("user", JSON.stringify(data.student));
 
-      navigate("/dashboard"); // redirect to dashboard after login
+      navigate("/home"); // redirect to dashboard after login
     } catch (err) {
       setError(err.message);
     } finally {

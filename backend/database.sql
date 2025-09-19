@@ -1,6 +1,8 @@
 CREATE DATABASE campuslearn;
 
--- STUDENT table
+-- ------------------------
+-- 1. STUDENTS table
+-- ------------------------
 CREATE TABLE students (
     student_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -10,14 +12,9 @@ CREATE TABLE students (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- TUTOR table (tutors are also students, so we link to students)
-CREATE TABLE tutors (
-    tutor_id SERIAL PRIMARY KEY,
-    student_id INT UNIQUE REFERENCES students(student_id) ON DELETE CASCADE
-    module_id INT REFERENCES modules(module_id) ON DELETE CASCADE
-);
-
--- Modules table
+-- ------------------------
+-- 2. MODULES table
+-- ------------------------
 CREATE TABLE modules (
     module_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -25,7 +22,18 @@ CREATE TABLE modules (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- TOPIC table
+-- ------------------------
+-- 3. TUTORS table
+-- ------------------------
+CREATE TABLE tutors (
+    tutor_id SERIAL PRIMARY KEY,
+    student_id INT UNIQUE REFERENCES students(student_id) ON DELETE CASCADE,
+    module_id INT REFERENCES modules(module_id) ON DELETE CASCADE
+);
+
+-- ------------------------
+-- 4. TOPICS table
+-- ------------------------
 CREATE TABLE topics (
     topic_id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -35,7 +43,9 @@ CREATE TABLE topics (
     module_id INT REFERENCES modules(module_id) ON DELETE CASCADE
 );
 
--- SUBSCRIPTIONS (students subscribing to topics)
+-- ------------------------
+-- 5. SUBSCRIPTIONS table
+-- ------------------------
 CREATE TABLE subscriptions (
     subscription_id SERIAL PRIMARY KEY,
     student_id INT REFERENCES students(student_id) ON DELETE CASCADE,
@@ -43,7 +53,31 @@ CREATE TABLE subscriptions (
     subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- RESOURCE table
+-- ------------------------
+-- 6. QUERIES table
+-- ------------------------
+CREATE TABLE queries (
+    query_id SERIAL PRIMARY KEY,
+    topic_id INT REFERENCES topics(topic_id) ON DELETE CASCADE,
+    created_by INT REFERENCES students(student_id) ON DELETE CASCADE,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ------------------------
+-- 7. RESPONSES table
+-- ------------------------
+CREATE TABLE responses (
+    response_id SERIAL PRIMARY KEY,
+    query_id INT REFERENCES queries(query_id) ON DELETE CASCADE,
+    tutor_id INT REFERENCES tutors(tutor_id) ON DELETE CASCADE,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ------------------------
+-- 8. RESOURCES table
+-- ------------------------
 CREATE TABLE resources (
     resource_id SERIAL PRIMARY KEY,
     topic_id INT REFERENCES topics(topic_id) ON DELETE CASCADE,
@@ -53,25 +87,9 @@ CREATE TABLE resources (
     uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- QUERY table
-CREATE TABLE queries (
-    query_id SERIAL PRIMARY KEY,
-    topic_id INT REFERENCES topics(topic_id) ON DELETE CASCADE,
-    created_by INT REFERENCES students(student_id) ON DELETE CASCADE,
-    content TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- RESPONSE table
-CREATE TABLE responses (
-    response_id SERIAL PRIMARY KEY,
-    query_id INT REFERENCES queries(query_id) ON DELETE CASCADE,
-    tutor_id INT REFERENCES tutors(tutor_id) ON DELETE CASCADE,
-    content TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- MESSAGE table
+-- ------------------------
+-- 9. MESSAGES table
+-- ------------------------
 CREATE TABLE messages (
     message_id SERIAL PRIMARY KEY,
     sender_id INT REFERENCES students(student_id) ON DELETE CASCADE,
@@ -80,7 +98,9 @@ CREATE TABLE messages (
     sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- NOTIFICATION table
+-- ------------------------
+-- 10. NOTIFICATIONS table
+-- ------------------------
 CREATE TABLE notifications (
     notification_id SERIAL PRIMARY KEY,
     recipient_id INT REFERENCES students(student_id) ON DELETE CASCADE,
