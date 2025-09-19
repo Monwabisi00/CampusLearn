@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import TopicCard from "./TopicCard";
 import NotificationItem from "./NotificationItem";
 import QueryModal from "./AddQuery";
+import TopicModal from "./CreateTopic"; // new modal
 
-const topics = [
+const initialTopics = [
   { title: "Data Structures & Algorithms", activity: "3 new queries" },
   { title: "Web Development", activity: "1 new response" },
   { title: "Machine Learning", activity: "2 new resources" },
@@ -19,11 +20,17 @@ const notifications = [
 ];
 
 export default function Dashboard() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isQueryModalOpen, setIsQueryModalOpen] = useState(false);
+  const [isTopicModalOpen, setIsTopicModalOpen] = useState(false);
   const [queries, setQueries] = useState([]);
+  const [topics, setTopics] = useState(initialTopics);
 
   const addQuery = (newQuery) => {
     setQueries([...queries, { id: queries.length + 1, ...newQuery }]);
+  };
+
+  const addTopic = (newTopic) => {
+    setTopics([...topics, { ...newTopic, activity: "No activity yet" }]);
   };
 
   return (
@@ -31,8 +38,16 @@ export default function Dashboard() {
       <h2 className="text-2xl font-semibold mb-4">Student Dashboard</h2>
 
       <div className="flex space-x-4 mb-6">
-        <button className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">+ Create New Topic</button>
-        <button onClick={() => setIsModalOpen(true)} className="border px-4 py-2 rounded-lg hover:bg-gray-100">
+        <button
+          onClick={() => setIsTopicModalOpen(true)}
+          className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800"
+        >
+          + Create New Topic
+        </button>
+        <button
+          onClick={() => setIsQueryModalOpen(true)}
+          className="border px-4 py-2 rounded-lg hover:bg-gray-100"
+        >
           Send Message
         </button>
       </div>
@@ -53,8 +68,18 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* Modal */}
-      <QueryModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={addQuery} />
+      {/* Modals */}
+      <QueryModal
+        isOpen={isQueryModalOpen}
+        onClose={() => setIsQueryModalOpen(false)}
+        onSubmit={addQuery}
+      />
+
+      <TopicModal
+        isOpen={isTopicModalOpen}
+        onClose={() => setIsTopicModalOpen(false)}
+        onSubmit={addTopic}
+      />
     </div>
   );
 }

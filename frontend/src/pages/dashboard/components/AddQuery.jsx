@@ -1,4 +1,4 @@
-// src/components/QueryModal.jsx
+
 import React from "react";
 
 export default function QueryModal({ isOpen, onClose, onSubmit }) {
