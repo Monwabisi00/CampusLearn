@@ -31,13 +31,8 @@ export default function Dashboard() {
       <h2 className="text-2xl font-semibold mb-4">Student Dashboard</h2>
 
       <div className="flex space-x-4 mb-6">
-        <button className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">
-          + Create New Topic
-        </button>
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="border px-4 py-2 rounded-lg hover:bg-gray-100"
-        >
+        <button className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">+ Create New Topic</button>
+        <button onClick={() => setIsModalOpen(true)} className="border px-4 py-2 rounded-lg hover:bg-gray-100">
           Send Message
         </button>
       </div>
@@ -59,11 +54,7 @@ export default function Dashboard() {
       </div>
 
       {/* Modal */}
-      <QueryModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={addQuery}
-      />
+      <QueryModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={addQuery} />
     </div>
   );
 }

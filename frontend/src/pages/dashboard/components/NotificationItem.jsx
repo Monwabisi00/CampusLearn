@@ -7,9 +7,7 @@ export default function NotificationItem({ text, time }) {
         <p className="font-medium">{text}</p>
         <p className="text-xs text-gray-500">{time}</p>
       </div>
-      <button className="border px-3 py-1 rounded hover:bg-gray-100">
-        Mark as Read
-      </button>
+      <button className="border px-3 py-1 rounded hover:bg-gray-100">Mark as Read</button>
     </div>
   );
 }

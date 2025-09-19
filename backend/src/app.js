@@ -14,6 +14,7 @@ import queryRoutes from "./routes/queryRoutes.js";
 import responseRoutes from "./routes/responseRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.use("/queries", queryRoutes);
 app.use("/responses", responseRoutes);
 app.use("/messages", messageRoutes);
 app.use("/notifications", notificationRoutes);
+app.use("/auth", authRoutes);
 
 // health
 app.get("/_health", (req, res) => res.json({ ok: true }));

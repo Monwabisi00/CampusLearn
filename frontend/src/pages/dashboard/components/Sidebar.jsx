@@ -22,9 +22,7 @@ export default function Sidebar() {
             end
             className={({ isActive }) =>
               `flex items-center space-x-2 px-3 py-2 rounded-lg w-full text-left transition-colors ${
-                isActive
-                  ? "bg-black text-white"
-                  : "text-gray-700 hover:bg-gray-100"
+                isActive ? "bg-black text-white" : "text-gray-700 hover:bg-gray-100"
               }`
             }
           >

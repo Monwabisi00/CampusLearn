@@ -74,11 +74,7 @@ export default function Messages() {
       </div>
 
       {/* Modal */}
-      <QueryModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={addQuery}
-      />
+      <QueryModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={addQuery} />
     </div>
   );
 }

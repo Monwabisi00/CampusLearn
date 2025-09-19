@@ -20,19 +20,14 @@ export default function QueryModal({ isOpen, onClose, onSubmit }) {
       <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-6">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">Add New Query</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-800"
-          >
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-800">
             ✕
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Title
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Title</label>
             <input
               type="text"
               name="title"
@@ -43,9 +38,7 @@ export default function QueryModal({ isOpen, onClose, onSubmit }) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Description
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Description</label>
             <textarea
               name="description"
               rows="3"
@@ -63,10 +56,7 @@ export default function QueryModal({ isOpen, onClose, onSubmit }) {
             >
               Cancel
             </button>
-            <button
-              type="submit"
-              className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700"
-            >
+            <button type="submit" className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">
               Submit Query
             </button>
           </div>

@@ -30,8 +30,7 @@ const topicsData = [
   {
     id: 2,
     title: "Web Development Basics",
-    description:
-      "Learn the fundamentals of web development, including HTML, CSS, JavaScript, and responsive design.",
+    description: "Learn the fundamentals of web development, including HTML, CSS, JavaScript, and responsive design.",
     author: "Prof. David Smith",
     resources: [
       { name: "HTML & CSS Guide", type: "PDF - 3 MB" },
@@ -80,13 +79,10 @@ const Topics = () => {
               {/* Header */}
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800">
-                    {topic.title}
-                  </h3>
+                  <h3 className="text-lg font-semibold text-gray-800">{topic.title}</h3>
                   <p className="text-gray-600 mt-1">{topic.description}</p>
                   <p className="text-sm text-gray-500 mt-2">
-                    Created by{" "}
-                    <span className="font-medium">{topic.author}</span>
+                    Created by <span className="font-medium">{topic.author}</span>
                   </p>
                 </div>
                 <button className="bg-black text-white px-4 py-2 rounded-lg">
@@ -110,9 +106,7 @@ const Topics = () => {
                             <p className="font-medium">{res.name}</p>
                             <p className="text-sm text-gray-500">{res.type}</p>
                           </div>
-                          <button className="bg-gray-200 px-3 py-1 rounded-lg">
-                            ⬇
-                          </button>
+                          <button className="bg-gray-200 px-3 py-1 rounded-lg">⬇</button>
                         </li>
                       ))}
                     </ul>
@@ -124,23 +118,15 @@ const Topics = () => {
                     {topic.queries.map((q, idx) => (
                       <div key={idx} className="mb-6">
                         <p className="font-semibold">
-                          {q.user}{" "}
-                          <span className="text-gray-500 text-sm">
-                            · {q.time}
-                          </span>
+                          {q.user} <span className="text-gray-500 text-sm">· {q.time}</span>
                         </p>
                         <p className="text-gray-700 mt-1">{q.text}</p>
                         {q.response && (
                           <div className="ml-4 mt-3 border-l-2 pl-4 border-gray-300">
                             <p className="font-semibold">
-                              {q.response.user}{" "}
-                              <span className="text-gray-500 text-sm">
-                                · {q.response.time}
-                              </span>
+                              {q.response.user} <span className="text-gray-500 text-sm">· {q.response.time}</span>
                             </p>
-                            <p className="text-gray-700 mt-1">
-                              {q.response.text}
-                            </p>
+                            <p className="text-gray-700 mt-1">{q.response.text}</p>
                           </div>
                         )}
                       </div>
