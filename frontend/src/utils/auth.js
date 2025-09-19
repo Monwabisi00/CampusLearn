@@ -1,20 +1,23 @@
+const authTokenKey = "campus-learn-token";
+const authUserKey = "campus-learn-user";
+
 export const authUtils = {
   setToken: (token) => {
-    localStorage.setItem("campus-learn-token", token);
+    localStorage.setItem(authTokenKey, token);
   },
   getToken: () => {
-    return localStorage.getItem("campus-learn-token");
+    return localStorage.getItem(authTokenKey);
   },
   removeToken: () => {
-    localStorage.removeItem("campus-learn-token");
+    localStorage.removeItem(authTokenKey);
   },
   setUser: (user) => {
-    localStorage.setItem("campus-learn-user", user);
+    localStorage.setItem(authUserKey, user);
   },
   getUser: () => {
-    return localStorage.getItem("campus-learn-user");
+    return localStorage.getItem(authUserKey);
   },
   removeUser: () => {
-    localStorage.removeItem("campus-learn-user");
+    localStorage.removeItem(authUserKey);
   },
 };
