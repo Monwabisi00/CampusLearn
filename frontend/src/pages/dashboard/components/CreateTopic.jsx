@@ -1,16 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function TopicModal({ isOpen, onClose, onSubmit }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [modules, setModules] = useState([]);
+  const [selectedModule, setSelectedModule] = useState("");
+
+  // Fetch modules when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      fetch("http://localhost:5000/modules") // adjust if your backend runs elsewhere
+        .then((res) => res.json())
+        .then((data) => setModules(data))
+        .catch((err) => console.error("Failed to fetch modules:", err));
+    }
+  }, [isOpen]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title.trim() || !description.trim()) return;
+    if (!title.trim() || !description.trim() || !selectedModule) return;
 
-    onSubmit({ title, description });
+    onSubmit({ title, description, moduleId: selectedModule });
     setTitle("");
     setDescription("");
+    setSelectedModule("");
     onClose();
   };
 
@@ -28,12 +41,28 @@ export default function TopicModal({ isOpen, onClose, onSubmit }) {
             onChange={(e) => setTitle(e.target.value)}
             className="w-full border rounded-lg px-3 py-2"
           />
+
           <textarea
             placeholder="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="w-full border rounded-lg px-3 py-2"
           />
+
+          {/* Dropdown for modules */}
+          <select
+            value={selectedModule}
+            onChange={(e) => setSelectedModule(e.target.value)}
+            className="w-full border rounded-lg px-3 py-2"
+          >
+            <option value="">Select a module</option>
+            {modules.map((m) => (
+              <option key={m.module_id} value={m.module_id}>
+                {m.name}
+              </option>
+            ))}
+          </select>
+
           <div className="flex justify-end space-x-3">
             <button
               type="button"

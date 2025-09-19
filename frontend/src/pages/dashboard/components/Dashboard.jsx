@@ -53,7 +53,7 @@ export default function Dashboard() {
       </div>
 
       {/* Topics */}
-      <h3 className="text-lg font-semibold mb-2">Subscribed Topics</h3>
+      <h3 className="text-lg font-semibold mb-2">Topics</h3>
       <div className="grid grid-cols-3 gap-4 mb-6">
         {topics.map((t, idx) => (
           <TopicCard key={idx} title={t.title} activity={t.activity} />
@@ -61,7 +61,7 @@ export default function Dashboard() {
       </div>
 
       {/* Notifications */}
-      <h3 className="text-lg font-semibold mb-2">Recent Notifications</h3>
+      <h3 className="text-lg font-semibold mb-2">Recent Messages</h3>
       <div className="space-y-3">
         {notifications.map((n, idx) => (
           <NotificationItem key={idx} text={n.text} time={n.time} />

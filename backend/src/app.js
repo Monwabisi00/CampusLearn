@@ -20,7 +20,13 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+// Enable CORS for all origins (or specify your frontend origin)
+app.use(cors({
+  origin: "http://localhost:3000", // or "*" for all origins
+  credentials: true
+}));
+
 
 // static uploads (create uploads/ folder later)
 const __filename = fileURLToPath(import.meta.url);
