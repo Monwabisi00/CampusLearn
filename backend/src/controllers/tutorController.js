@@ -1,5 +1,4 @@
 import pool from "../config/db.js";
-import bcrypt from "bcryptjs";
 
 // Create tutor record for an existing student
 const createTutor = async (req, res) => {

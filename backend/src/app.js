@@ -5,6 +5,15 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import studentRoutes from "./routes/studentRoutes.js";
+import tutorRoutes from "./routes/tutorRoutes.js";
+import moduleRoutes from "./routes/moduleRoutes.js";
+import topicRoutes from "./routes/topicRoutes.js";
+import subscriptionRoutes from "./routes/subscriptionRoutes.js";
+import resourceRoutes from "./routes/resourceRoutes.js";
+import queryRoutes from "./routes/queryRoutes.js";
+import responseRoutes from "./routes/responseRoutes.js";
+import messageRoutes from "./routes/messageRoutes.js";
+import notificationRoutes from "./routes/notificationRoutes.js";
 
 dotenv.config();
 
@@ -18,7 +27,16 @@ const __dirname = path.dirname(__filename);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // routes
-app.use("/api/students", studentRoutes);
+app.use("/students", studentRoutes);
+app.use("/tutors", tutorRoutes);
+app.use("/modules", moduleRoutes);
+app.use("/topics", topicRoutes);
+app.use("/subscriptions", subscriptionRoutes);
+app.use("/resources", resourceRoutes);
+app.use("/queries", queryRoutes);
+app.use("/responses", responseRoutes);
+app.use("/messages", messageRoutes);
+app.use("/notifications", notificationRoutes);
 
 // health
 app.get("/_health", (req, res) => res.json({ ok: true }));
