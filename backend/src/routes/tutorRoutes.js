@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import studentController from "../controllers/studentController.js";
+import tutorController from "../controllers/tutorController.js";
 import auth from "../middleware/auth.js";
 
 // create tutor record (only owner or admin should normally do this; keep protected)
