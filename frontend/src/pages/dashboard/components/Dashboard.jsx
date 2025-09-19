@@ -48,7 +48,7 @@ export default function Dashboard() {
           onClick={() => setIsQueryModalOpen(true)}
           className="border px-4 py-2 rounded-lg hover:bg-gray-100"
         >
-          Send Message
+          Send Query
         </button>
       </div>
 
