@@ -1,6 +1,3 @@
-
-import React from "react";
-
 export default function QueryModal({ isOpen, onClose, onSubmit }) {
   if (!isOpen) return null;
 
